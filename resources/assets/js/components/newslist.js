@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 const NewsList = props => {
-    
+    console.log(props.maxPage);
     return(
         <Fragment>
             { props.data.map(item =>{
@@ -22,7 +22,7 @@ const NewsList = props => {
                 if(props.maxPage > 0){
                     const items = [];
                     for (let i = 1; i<=props.maxPage; i++) {
-                        if(i==1){
+                        if(i == props.currentPage){
                             items.push(<li key={i} data-index={i} className="current" onClick={props.onClickPageNation}>{i}</li>)
                         }else{
                             items.push(<li key={i} data-index={i} onClick={props.onClickPageNation}>{i}</li>)

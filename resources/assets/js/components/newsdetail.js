@@ -5,62 +5,43 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-r
 import Loading from './loading'
 
 const NewsDetail = props => {
-    
-    const [detail, setDetail] = useState({});
     const { id } = useParams();
-    const pageId = id.length <= 5 ? "/" + id : "/000"
     
     useEffect(() => {
-        
-        if(!Object.keys(detail).length){
-            const url = domein + restUrl + postsUrl + pageId + "?" + postsParameter
-            fetch(url)
-            .then((response) => {
-                return response.json()
-            })
-            .then((responseData) => {
-                setDetail(responseData)
-            })
-            .catch((error)=>{
-                //fetch自体が失敗したとき
-                console.log("取得に失敗しました。: " + error);
-            })
+        console.log(!"data" in props.single);
+        if(props.single.id != id){
+            if(!("data" in props.single)){
+                const url = domein + restUrl + postsUrl + "/" + id + "?" + postsParameter
+                props.getFetch(url, 'single')
+            }
         }
         
     });
     
-    //記事情報がロードできているかどうか
-    if(!Object.keys(detail).length){
+    if("data" in props.single){
+        
         return(
-            <Loading />
+            <div className="error">
+                <h1>{ props.single.message ? props.single.message : "" }</h1>
+                <p>{ props.single.data ? props.single.data.status : "" }</p>
+            </div>
         )
+        
     }else{
         
-        if("data" in detail){
-            
-            return(
-                <div className="error">
-                    <h1>{ detail.message }</h1>
-                    <p>{ detail.data.status }</p>
-                </div>
-            )
-            
-        }else{
-            
-            return(
-                <div className="news_single">
-                    <h1 className="news_title" dangerouslySetInnerHTML={{ __html: detail.excerpt.rendered }}></h1>
+        return(
+            <div className="news_single">
+                <h1 className="news_title" dangerouslySetInnerHTML={{ __html: props.single.excerpt ? props.single.excerpt.rendered : "" }}></h1>
 
-                    <p className="date"><time dateTime={ detail.date }>{ makeDate(detail.date) }</time></p>
+                <p className="date"><time dateTime={ props.single.date ? props.single.date : "" }>{ makeDate(props.single.date ? props.single.date : "") }</time></p>
 
-                    <div className="news_details" dangerouslySetInnerHTML={{ __html: detail.content.rendered }}></div>
+                <div className="news_details" dangerouslySetInnerHTML={{ __html: props.single.content ? props.single.content.rendered : "" }}></div>
 
-                    <p className="back"><Link to="/">&lt; archive</Link></p>
+                <p className="back"><Link to="/123456">&lt; archive</Link></p>
 
-                </div>
-            )
-            
-        }
+            </div>
+        )
+        
     }
 
 }

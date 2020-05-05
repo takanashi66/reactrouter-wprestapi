@@ -13,23 +13,28 @@ class News extends Component {
         super(props)
         this.state = {
             isLoading: false,
-            isSingle: false,
             maxPage: 0,
-            data: []
+            currentPage: 1,
+            data: [],
+            single: {}
         }
         
         this.onClickPageNation = this.onClickPageNation.bind(this)
+        this.getFetch = this.getFetch.bind(this)
     }
     
     componentDidMount(){
         
+        //fetchするURLを生成
+        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10"
+        this.getFetch(url, 'data')
+    }
+    
+    getFetch(url, stateName){
         //ローディング開始
         this.setState({
             isLoading: true,
         })
-        
-        //fetchするURLを生成
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10"
         
         fetch(url)
         .then((response) => {
@@ -41,55 +46,27 @@ class News extends Component {
         .then((responseData) => {
             this.setState({
                 isLoading: false,
-                data: responseData,
+                [stateName]: responseData,
             })
-            
-            //console.log(this.state.data);
         })
         .catch((error)=>{
             //fetch自体が失敗したとき
             console.log("取得に失敗しました。" + "error: " + error);
         })
-        
     }
     
     onClickPageNation(e){
         e.preventDefault()
         const dataIndex = e.currentTarget.getAttribute('data-index')
         
-        //ページネーションのliから.currentを外してcurrentTargetに.currentをつける
-        const prev = e.currentTarget.parentNode.childNodes;
-        prev.forEach((item, i) => {
-            item.classList.remove("current")
-        })
-        e.currentTarget.classList.add("current")
-        
         //ローディング開始
         this.setState({
-            isLoading: true
+            currentPage: dataIndex
         })
         
         //fetchするURLを生成
         const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10" + "&" + page + dataIndex
-        
-        fetch(url)
-        .then((response) => {
-            this.setState({
-                maxPage: response.headers.get('x-wp-totalpages')
-            })
-            return response.json()
-        })
-        .then((responseData) => {
-            this.setState({
-                isLoading: false,
-                data: responseData,
-            })
-        })
-        .catch((error)=>{
-            //fetch自体が失敗したとき
-            console.log("取得に失敗しました。" + "error: " + error);
-        })
-
+        this.getFetch(url, 'data')
     }
     
     render(){
@@ -98,10 +75,10 @@ class News extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        { this.state.isLoading ? <Loading /> : <NewsList data={ this.state.data } maxPage={ this.state.maxPage } onClickPageNation={ this.onClickPageNation } /> }
+                        { this.state.isLoading ? <Loading /> : <NewsList data={ this.state.data } maxPage={ this.state.maxPage } onClickPageNation={ this.onClickPageNation } currentPage={this.state.currentPage} /> }
                     </Route>
                     <Route exact path="/:id">
-                        { this.state.isLoading ? <Loading /> : <NewsDetail /> }
+                        { this.state.isLoading ? <Loading /> : <NewsDetail getFetch={this.getFetch} single={this.state.single} /> }
                     </Route>
                 </Switch>
             </Router>

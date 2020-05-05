@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="common/css/defaultstyle.css">
+    <link rel="icon" href="" type="image/png">
+    <title>Document</title>
+</head>
+<body>
+    <div id="news"></div>
+    
+    <script>
+        const domein         = 'https://codecodeweb.com'
+        const restUrl        = '/wp-json/wp/v2/'
+        const postsUrl       = 'posts'
+        const postsParameter = '_embed'
+        const perPage = 'per_page='
+        const page = 'page='
+        
+        const makeDate = dateTime =>{
+            return dateTime.slice(0, -9).replace(/-/g, ".")
+        }
+    </script>
+    <script src="common/js/news.js"></script>
+</body>
+</html>

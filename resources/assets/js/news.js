@@ -75,7 +75,7 @@ class News extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        { this.state.isLoading ? <Loading /> : <NewsList data={ this.state.data } maxPage={ this.state.maxPage } onClickPageNation={ this.onClickPageNation } currentPage={this.state.currentPage} /> }
+                        { this.state.isLoading ? <Loading /> : <NewsList data={ this.state.data } currentPage={this.state.currentPage} maxPage={ this.state.maxPage } onClickPageNation={ this.onClickPageNation } /> }
                     </Route>
                     <Route exact path="/:id">
                         { this.state.isLoading ? <Loading /> : <NewsDetail getFetch={this.getFetch} single={this.state.single} /> }

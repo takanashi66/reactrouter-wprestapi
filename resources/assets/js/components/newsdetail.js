@@ -8,7 +8,7 @@ const NewsDetail = props => {
     const { id } = useParams();
     
     useEffect(() => {
-        console.log(!"data" in props.single);
+        
         if(props.single.id != id){
             if(!("data" in props.single)){
                 const url = domein + restUrl + postsUrl + "/" + id + "?" + postsParameter
@@ -31,13 +31,13 @@ const NewsDetail = props => {
         
         return(
             <div className="news_single">
-                <h1 className="news_title" dangerouslySetInnerHTML={{ __html: props.single.excerpt ? props.single.excerpt.rendered : "" }}></h1>
+                <h1 className="news_title" dangerouslySetInnerHTML={{ __html: props.single.title ? props.single.title.rendered : "" }}></h1>
 
                 <p className="date"><time dateTime={ props.single.date ? props.single.date : "" }>{ makeDate(props.single.date ? props.single.date : "") }</time></p>
 
                 <div className="news_details" dangerouslySetInnerHTML={{ __html: props.single.content ? props.single.content.rendered : "" }}></div>
 
-                <p className="back"><Link to="/123456">&lt; archive</Link></p>
+                <p className="back"><Link to="/">&lt; archive</Link></p>
 
             </div>
         )

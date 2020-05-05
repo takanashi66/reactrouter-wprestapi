@@ -1,6 +1,8 @@
 import React, {Component,Fragment} from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, useRouterHistory } from "react-router-dom"
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
 
 //コンポーネント
 import Loading from './components/loading'
@@ -28,6 +30,7 @@ class News extends Component {
         //fetchするURLを生成
         const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10"
         this.getFetch(url, 'data')
+        
     }
     
     getFetch(url, stateName){
@@ -77,8 +80,8 @@ class News extends Component {
                     <Route exact path="/">
                         { this.state.isLoading ? <Loading /> : <NewsList data={ this.state.data } currentPage={this.state.currentPage} maxPage={ this.state.maxPage } onClickPageNation={ this.onClickPageNation } /> }
                     </Route>
-                    <Route exact path="/:id">
-                        { this.state.isLoading ? <Loading /> : <NewsDetail getFetch={this.getFetch} single={this.state.single} /> }
+                    <Route path="/:id">
+                        { this.state.isLoading ? <Loading /> : <NewsDetail getFetch={this.getFetch} single={this.state.single} currentPage={this.state.currentPage} history={history} /> }
                     </Route>
                 </Switch>
             </Router>

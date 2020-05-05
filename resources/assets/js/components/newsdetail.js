@@ -1,5 +1,5 @@
 import React, {Component, Fragment, useEffect} from 'react'
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, useParams, withRouter } from "react-router-dom"
 import {Helmet} from "react-helmet"
 
 //コンポーネント
@@ -18,6 +18,12 @@ const NewsDetail = props => {
         }
         
     });
+    
+    const onClickReturnList = ()=>{
+        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10" + "&" + page + props.currentPage
+        props.getFetch(url, 'data')
+        props.history.push("/")
+    }
     
     if("data" in props.single){
         
@@ -51,7 +57,7 @@ const NewsDetail = props => {
 
                     <div className="news_details" dangerouslySetInnerHTML={{ __html: props.single.content ? props.single.content.rendered : "" }}></div>
 
-                    <p className="back"><Link to="/">&lt; archive</Link></p>
+                    <p className="back"><a onClick={onClickReturnList}>&lt; archive</a></p>
 
                 </div>
             </Fragment>
@@ -61,4 +67,4 @@ const NewsDetail = props => {
 
 }
 
-export default NewsDetail
+export default withRouter(NewsDetail)

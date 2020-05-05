@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 
 const PageNation = props => {
-    console.log("props.maxPage: " + props.maxPage);
+    
     return(
         <Fragment>
         

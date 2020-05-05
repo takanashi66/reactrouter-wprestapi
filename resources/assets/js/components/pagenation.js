@@ -4,7 +4,7 @@ const PageNation = props => {
     console.log("props.maxPage: " + props.maxPage);
     return(
         <Fragment>
-            <p>ページネーション</p>
+        
             {(() => {
                 if(props.maxPage > 0){
                     const items = [];

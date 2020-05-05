@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import {Helmet} from "react-helmet"
 
 import PageNation from './pagenation'
 
@@ -7,6 +8,11 @@ const NewsList = props => {
     
     return(
         <Fragment>
+            <Helmet>
+                <title>記事一覧 | CodeCode</title>
+                <meta name="description" content="CodeCodeの記事一覧です。" />
+            </Helmet>
+            
             { props.data.map(item =>{
                 
                 return(

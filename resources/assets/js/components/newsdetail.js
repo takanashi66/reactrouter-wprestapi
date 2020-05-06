@@ -10,11 +10,9 @@ const NewsDetail = props => {
     
     useEffect(() => {
         
-        if(props.single.id != id){
-            if(!("data" in props.single)){
-                const url = domein + restUrl + postsUrl + "/" + id + "?" + postsParameter
-                props.getFetch(url, 'single')
-            }
+        if(props.single.id != id && !("data" in props.single)){
+            const url = domein + restUrl + postsUrl + "/" + id + "?" + postsParameter
+            props.getFetch(url, 'single')
         }
         
     });
@@ -37,6 +35,7 @@ const NewsDetail = props => {
                 <div className="error">
                     <h1>{ props.single.message ? props.single.message : "" }</h1>
                     <p>{ props.single.data ? props.single.data.status : "" }</p>
+                    <p className="back"><a onClick={onClickReturnList}>&lt; archive</a></p>
                 </div>
             </Fragment>
         )

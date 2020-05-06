@@ -20,7 +20,7 @@ const NewsDetail = props => {
     });
     
     const onClickReturnList = ()=>{
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10" + "&" + page + props.currentPage
+        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum + "&" + page + props.currentPage
         props.getFetch(url, 'data')
         props.history.push("/")
     }

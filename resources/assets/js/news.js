@@ -28,7 +28,7 @@ class News extends Component {
     componentDidMount(){
         
         //fetchするURLを生成
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10"
+        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum
         this.getFetch(url, 'data')
         
     }
@@ -68,7 +68,7 @@ class News extends Component {
         })
         
         //fetchするURLを生成
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + "10" + "&" + page + dataIndex
+        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum + "&" + page + dataIndex
         this.getFetch(url, 'data')
     }
     

@@ -9,6 +9,11 @@ import Loading from './components/loading'
 import NewsList from './components/newslist'
 import NewsDetail from './components/newsdetail'
 
+//設定をインポート
+import config from './config.json'
+//関数をインポート
+import { makeDate } from './functions'
+
 class News extends Component {
     
     constructor(props) {
@@ -28,7 +33,7 @@ class News extends Component {
     componentDidMount(){
         
         //fetchするURLを生成
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum
+        const url = config.domein + config.restUrl + config.postsUrl + "?" + config.postsParameter + "&" + config.perPage + config.perPageNum
         this.getFetch(url, 'data')
         
     }
@@ -68,7 +73,7 @@ class News extends Component {
         })
         
         //fetchするURLを生成
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum + "&" + page + dataIndex
+        const url = config.domein + config.restUrl + config.postsUrl + "?" + config.postsParameter + "&" + config.perPage + config.perPageNum + "&" + config.page + dataIndex
         this.getFetch(url, 'data')
     }
     

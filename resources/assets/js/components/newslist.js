@@ -2,7 +2,10 @@ import React, {Component, Fragment} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import {Helmet} from "react-helmet"
 
-import PageNation from './pagenation'
+//設定をインポート
+import config from '../config.json'
+//関数をインポート
+import { makeDate } from '../functions'
 
 const NewsList = props => {
     

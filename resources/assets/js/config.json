@@ -1,0 +1,9 @@
+{
+    "domein": "https://codecodeweb.com",
+    "restUrl": "/wp-json/wp/v2/",
+    "postsUrl": "posts",
+    "postsParameter": "_embed",
+    "perPage": "per_page=",
+    "perPageNum": "10",
+    "page": "page="
+}

@@ -8,20 +8,6 @@
 </head>
 <body>
     <div id="news"></div>
-    
-    <script>
-        const domein         = 'https://codecodeweb.com'
-        const restUrl        = '/wp-json/wp/v2/'
-        const postsUrl       = 'posts'
-        const postsParameter = '_embed'
-        const perPage        = 'per_page='
-        const perPageNum     = '10'
-        const page           = 'page='
-        
-        const makeDate = dateTime =>{
-            return dateTime.slice(0, -9).replace(/-/g, ".")
-        }
-    </script>
     <script src="common/js/news.js"></script>
 </body>
 </html>

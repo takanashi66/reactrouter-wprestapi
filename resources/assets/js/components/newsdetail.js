@@ -5,20 +5,25 @@ import {Helmet} from "react-helmet"
 //コンポーネント
 import Loading from './loading'
 
+//設定をインポート
+import config from '../config.json'
+//関数をインポート
+import { makeDate } from '../functions'
+
 const NewsDetail = props => {
     const { id } = useParams();
     
     useEffect(() => {
         
         if(props.single.id != id && !("data" in props.single)){
-            const url = domein + restUrl + postsUrl + "/" + id + "?" + postsParameter
+            const url = config.domein + config.restUrl + config.postsUrl + "/" + id + "?" + config.postsParameter
             props.getFetch(url, 'single')
         }
         
     });
     
     const onClickReturnList = ()=>{
-        const url = domein + restUrl + postsUrl + "?" + postsParameter + "&" + perPage + perPageNum + "&" + page + props.currentPage
+        const url = config.domein + config.restUrl + config.postsUrl + "?" + config.postsParameter + "&" + config.perPage + config.perPageNum + "&" + config.page + props.currentPage
         props.getFetch(url, 'data')
         props.history.push("/")
     }

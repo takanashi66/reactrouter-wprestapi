@@ -1,30 +1,34 @@
 const mix = require('laravel-mix');
+const historyFallback = require('connect-history-api-fallback');
 
 mix.react('resources/assets/js/news.js', 'public/common/js')
-   .sass('resources/assets/scss/style.scss', 'public/common/css')
-   .options({
-      processCssUrls: false,
-      postCss: [
+.sass('resources/assets/scss/style.scss', 'public/common/css')
+.options({
+    processCssUrls: false,
+    postCss: [
         require('css-mqpacker')()
-      ],
-      autoprefixer: {
+    ],
+    autoprefixer: {
         browsers: ['last 2 versions'],
         options: {
-          grid: true,
+            grid: true,
         }
-      }
-   })
-   .sourceMaps()
-   
+    }
+})
+.sourceMaps()
+
 mix.webpackConfig({ devtool: "inline-source-map" })
 
 mix.browserSync({
-  server: 'public',
-  proxy: false,
-  files: [
-    'public/**/*.html',
-    'public/**/*.php',
-    'public/common/js/*.js',
-    'public/common/css/*.css',
-  ]
+    server: 'public',
+    proxy: false,
+    files: [
+        'public/**/*.html',
+        'public/**/*.php',
+        'public/common/js/*.js',
+        'public/common/css/*.css',
+    ],
+    middleware: [
+        historyFallback()
+    ],
 })

@@ -1,32 +1,7 @@
-html{
-    font-size: 62.5%;
-}
+@use 'vars' as *;
 
 body{
     font-family: $font-family;
-}
-
-@for $i from 1 through 6 {
-  h#{$i} {
-    font-weight: normal;
-  }
-}
-
-header,
-footer,
-nav,
-menu,
-article,
-aside,
-section,
-details,
-figcaption,
-figure{
-  display: block;
-}
-
-th{
-    font-weight: normal;
 }
 
 input,

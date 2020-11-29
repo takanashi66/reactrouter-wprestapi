@@ -2,8 +2,9 @@ import React, {Component, Fragment} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import {Helmet} from "react-helmet"
 
-//設定をインポート
-import config from '../config.json'
+//コンポーネント
+import PageNation from './pagenation'
+
 //関数をインポート
 import { makeDate } from '../functions'
 
